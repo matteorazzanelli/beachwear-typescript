@@ -1,53 +1,53 @@
 // uomo/donna, relax, active, extreme, kids
 
-import { Cliente, Pagamento } from "./cliente/cliente";
-import { ProcessoProduzione } from "./processo/processo";
-import { Prodotto, Stato, Taglia, Type } from "./prodotto/prodotto";
+import { Client, Payment } from "./client/client";
+import { ProductionProcess } from "./process/process";
+import { Product, State, Size, Type } from "./product/product";
 
-// Istanzia alcuni oggetti Prodotto
-const prodotti: Prodotto[] = [
-  new Prodotto(Type.CAPPELLO, 0, Taglia.S, 'nero', Stato.DISPONIBILE),
-  new Prodotto(Type.CAPPELLO, 0, Taglia.M, 'verde', Stato.DISPONIBILE),
-  new Prodotto(Type.CAPPELLO, 0, Taglia.L, 'giallo', Stato.ESAURITO),
-  new Prodotto(Type.COSTUME, 0, Taglia.S, 'nero', Stato.DISPONIBILE),
-  new Prodotto(Type.COSTUME, 0, Taglia.M, 'nero', Stato.DISPONIBILE),
-  new Prodotto(Type.PAREO, 0, Taglia.S, 'nero', Stato.DISPONIBILE),
-  new Prodotto(Type.PAREO, 0, Taglia.M, 'verde', Stato.DISPONIBILE),
-  new Prodotto(Type.PAREO, 0, Taglia.L, 'giallo', Stato.ESAURITO),
+// Instantiate come Product objects
+const products: Product[] = [
+  new Product(Type.HAT, 0, Size.S, 'black', State.AVAILABLE),
+  new Product(Type.HAT, 0, Size.M, 'green', State.AVAILABLE),
+  new Product(Type.HAT, 0, Size.L, 'yellow', State.OUT_OF_STOCK),
+  new Product(Type.SWIMMING_SUIT, 0, Size.S, 'black', State.AVAILABLE),
+  new Product(Type.SWIMMING_SUIT, 0, Size.M, 'black', State.AVAILABLE),
+  new Product(Type.PAREO, 0, Size.S, 'black', State.AVAILABLE),
+  new Product(Type.PAREO, 0, Size.M, 'green', State.AVAILABLE),
+  new Product(Type.PAREO, 0, Size.L, 'yellow', State.OUT_OF_STOCK),
 ];
 
-// Istanzia oggetti Cliente
-const clienti: Cliente[] = [
-  new Cliente('marco', 'verdi', 'marco.verdi@gmail.it', Pagamento.CARTA),
-  new Cliente('luca', 'neri', 'luca.neri@gmail.it', Pagamento.CARTA),
-  new Cliente('maria', 'rossi', 'maria.rossi@gmail.it', Pagamento.CONTANTI),
-  new Cliente('simona', 'gialli', 'simona.gialli@gmail.it', Pagamento.CARTA)
+// Instantiate come Client objects
+const clients: Client[] = [
+  new Client('marco', 'verdi', 'marco.verdi@gmail.it', Payment.CARD),
+  new Client('luca', 'neri', 'luca.neri@gmail.it', Payment.CARD),
+  new Client('maria', 'rossi', 'maria.rossi@gmail.it', Payment.CASH),
+  new Client('simona', 'gialli', 'simona.gialli@gmail.it', Payment.CARD)
 ];
 
-// Crea più istanze della classe ProcessoProduzione
-const processoProduzione: ProcessoProduzione[] = [
-  new ProcessoProduzione('metodoA', 'descrizione del metodo A'),
-  new ProcessoProduzione('metodoB', 'descrizione del metodo B')
+// Create more tha 1 instance of class ProductionProcess
+const productionProcess: ProductionProcess[] = [
+  new ProductionProcess('methodA', 'description of method A'),
+  new ProductionProcess('methodB', 'description of method B')
 ];
 
-// ...aggiungendo i prodotti istanziati al processo
-processoProduzione[0].aggiungiProdotto(prodotti[0])
-processoProduzione[0].aggiungiProdotto(prodotti[1])
-processoProduzione[0].aggiungiProdotto(prodotti[2])
-processoProduzione[0].aggiungiProdotto(prodotti[3])
-processoProduzione[0].aggiungiProdotto(prodotti[4])
-processoProduzione[1].aggiungiProdotto(prodotti[5])
-processoProduzione[1].aggiungiProdotto(prodotti[6])
-processoProduzione[1].aggiungiProdotto(prodotti[7])
+// ...add the instantiated products
+productionProcess[0].addProduct(products[0])
+productionProcess[0].addProduct(products[1])
+productionProcess[0].addProduct(products[2])
+productionProcess[0].addProduct(products[3])
+productionProcess[0].addProduct(products[4])
+productionProcess[1].addProduct(products[5])
+productionProcess[1].addProduct(products[6])
+productionProcess[1].addProduct(products[7])
 
-// Testa la logica di ordinazione dei prodotti da parte dei clienti 
-clienti[0].ordinaProdotto(prodotti[0]) // DISPONIBILE
-clienti[1].ordinaProdotto(prodotti[2]) // ESAURITO
+// Test customers' product ordering logic 
+clients[0].orderProduct(products[0]) // AVAILABLE
+clients[1].orderProduct(products[2]) // OUT_OF_STOCK
 
-if(clienti[0].prodotto)
-  prodotti[0].assegnaCliente(clienti[0]) // OK
-if(clienti[1].prodotto)
-  prodotti[2].assegnaCliente(clienti[1]) // NON VERRA' ESEGUITO
+if(clients[0].product)
+  products[0].assignClient(clients[0]) // OK
+if(clients[1].product)
+  products[2].assignClient(clients[1]) // NO
 
-// e l'aggiunta di nuovi articoli ai processi di produzione.
-// vedi righe 34-41
+// and adding new items to manufacturing processes.
+// see again 34-41
